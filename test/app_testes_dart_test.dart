@@ -17,4 +17,17 @@ void main() {
   test('Não permite informar valor do desconto zerado', () {
     expect(() => CalculaDesconto.calcularDesconto(1000, 0, true), throwsArgumentError);
   });
+
+  group("Calcula o valor do produto com desconto", () {
+    var valuesToTest = {
+      {'valor': 1000, 'desconto': 150, 'percentual': false}: 850,
+      {'valor': 1000, 'desconto': 15, 'percentual': true}: 850,
+    };
+    valuesToTest.forEach((values, expected) {
+      test('$values: $expected', () {
+        expect(CalculaDesconto.calcularDesconto(double.parse(values['valor'].toString()),
+            double.parse(values['desconto'].toString()), values['percentual'] == true), equals(expected));
+      });
+    });
+  });
 }
